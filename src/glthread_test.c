@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <malloc.h>
 #include <string.h>
+#include <stddef.h>
 
 #include "glthread.h"
 
@@ -49,7 +50,7 @@ int main()
     bob.emp_id = 53;
 
     glthread_t lst;
-    memset(&lst, 0, sizeof(lst));
+    glthread_init(&lst, offsetof(emp, glnode));
     glthread_add(&lst, &bob.glnode);
     glthread_add(&lst, &arun.glnode);
 
