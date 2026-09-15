@@ -28,3 +28,8 @@ void glthread_del(glthread_t *lst, glthread_node_t *glnode)
     glnode->left = NULL;
     glnode->right = NULL;
 }
+void glthread_init(glthread_t *lst, unsigned int offset)
+{
+    lst->head = NULL;
+    lst->offset = offset;
+}

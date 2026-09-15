@@ -1,13 +1,19 @@
-cmake_minimum_required(VERSION 3.26)   # 指定 CMake 最低版本
-project(test)                      # 项目名称
+cmake_minimum_required(VERSION 3.26)
+project(GLTthread)
 
-add_executable(test
-    utils/glthread.c
-    src/test.c
-)            # 生成可执行程序
+# 自动收集 utils 目录下所有 .c 文件（支持增量检测）
+file(GLOB UTILS_SOURCES CONFIGURE_DEPENDS "${CMAKE_SOURCE_DIR}/utils/*.c")
 
-target_include_directories(test PRIVATE
-    ${CMAKE_SOURCE_DIR}/include
-)
+# glthread 测试
+add_executable(glthread_test ${UTILS_SOURCES} src/glthread_test.c)
+target_include_directories(glthread_test PRIVATE ${CMAKE_SOURCE_DIR}/include)
+
+# glqueue 测试
+add_executable(glqueue_test ${UTILS_SOURCES} src/glqueue_test.c)
+target_include_directories(glqueue_test PRIVATE ${CMAKE_SOURCE_DIR}/include)
+
+# glstack 测试
+add_executable(glstack_test ${UTILS_SOURCES} src/glstack_test.c)
+target_include_directories(glstack_test PRIVATE ${CMAKE_SOURCE_DIR}/include)
 
 set(CMAKE_BUILD_TYPE Debug)
