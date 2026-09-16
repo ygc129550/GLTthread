@@ -1,7 +1,7 @@
 #ifndef GLSTACK_H
 #define GLSTACK_H
 
-#include "glthread.h"
+#include "glnode.h"
 
 typedef struct glstack_t
 {

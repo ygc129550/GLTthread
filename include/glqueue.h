@@ -1,7 +1,7 @@
 #ifndef GLQUEUE_H
 #define GLQUEUE_H
 
-#include "glthread.h"
+#include "glnode.h"
 
 typedef struct glqueue_t
 {

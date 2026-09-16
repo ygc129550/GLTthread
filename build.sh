@@ -65,5 +65,4 @@ echo "==> Building (parallel)..."
 cmake --build "${BUILD_DIR}" -j "$(nproc)"
 
 echo ""
-echo "==> Build complete. Outputs in ${BUILD_DIR}:"
-ls -lh "${BUILD_DIR}"/libglt.* "${BUILD_DIR}"/*_test 2>/dev/null || echo "  (no matching outputs found)"
+echo "==> Build complete. Outputs in ${BUILD_DIR}"

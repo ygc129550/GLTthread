@@ -3,7 +3,7 @@
 #include <string.h>
 #include <stddef.h>
 
-#include "glthread.h"
+#include "gllist.h"
 
 typedef struct emp
 {
