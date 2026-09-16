@@ -11,10 +11,10 @@ typedef struct emp
     unsigned int salary;
     char designation[30];
     unsigned int emp_id;
-    glthread_node_t glnode;
+    glue_node_t glnode;
 } emp;
 
-void print_emp_details(glthread_node_t *glnode)
+void print_emp_details(glue_node_t *glnode)
 {
     emp *addr = (emp*)((char*)glnode - offsetof(emp, glnode));
     printf("name: %s\n", addr->name);
@@ -23,9 +23,9 @@ void print_emp_details(glthread_node_t *glnode)
     printf("emp_id: %d\n", addr->emp_id);
 }
 
-void print_all_list(glthread_node_t *head)
+void print_all_list(glue_node_t *head)
 {
-    glthread_node_t *cur = head;
+    glue_node_t *cur = head;
     while (cur)
     {
         print_emp_details(cur);
@@ -49,14 +49,14 @@ int main()
     snprintf(bob.designation, 30, "slslsl");
     bob.emp_id = 53;
 
-    glthread_t lst;
-    glthread_init(&lst, offsetof(emp, glnode));
-    glthread_add(&lst, &bob.glnode);
-    glthread_add(&lst, &arun.glnode);
+    gllist_t lst;
+    gllist_init(&lst, offsetof(emp, glnode));
+    gllist_add(&lst, &bob.glnode);
+    gllist_add(&lst, &arun.glnode);
 
     print_all_list(lst.head);
 
-    glthread_del(&lst, &arun.glnode);
+    gllist_del(&lst, &arun.glnode);
     printf("------------------\n");
     print_all_list(lst.head);
 

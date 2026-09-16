@@ -9,10 +9,10 @@ typedef struct emp
     unsigned int salary;
     char designation[30];
     unsigned int emp_id;
-    glthread_node_t glnode;
+    glue_node_t glnode;
 } emp;
 
-static void print_emp(glthread_node_t *node)
+static void print_emp(glue_node_t *node)
 {
     emp *e = (emp *)((char *)node - offsetof(emp, glnode));
     printf("  [%u] %-10s salary=%-6u %s\n", e->emp_id, e->name, e->salary, e->designation);
@@ -35,7 +35,7 @@ int main(void)
     printf("=== Push %d employees ===\n", n);
     for (int i = 0; i < n; i++)
     {
-        memset(&employees[i].glnode, 0, sizeof(glthread_node_t));
+        memset(&employees[i].glnode, 0, sizeof(glue_node_t));
         glstack_push(&stk, &employees[i].glnode);
         printf("  pushed: %s\n", employees[i].name);
     }
@@ -43,14 +43,14 @@ int main(void)
 
     /* peek top */
     printf("\n=== Top ===\n");
-    glthread_node_t *top = glstack_peek(&stk);
+    glue_node_t *top = glstack_peek(&stk);
     if (top) print_emp(top);
 
     /* pop all */
     printf("\n=== Pop all ===\n");
     while (!glstack_empty(&stk))
     {
-        glthread_node_t *node = glstack_pop(&stk);
+        glue_node_t *node = glstack_pop(&stk);
         printf("  popped: ");
         print_emp(node);
     }
@@ -58,7 +58,7 @@ int main(void)
 
     /* pop from empty stack */
     printf("\n=== Pop from empty ===\n");
-    glthread_node_t *null_node = glstack_pop(&stk);
+    glue_node_t *null_node = glstack_pop(&stk);
     printf("pop returned: %s\n", null_node ? "node" : "NULL");
 
     return 0;

@@ -9,10 +9,10 @@ typedef struct emp
     unsigned int salary;
     char designation[30];
     unsigned int emp_id;
-    glthread_node_t glnode;
+    glue_node_t glnode;
 } emp;
 
-static void print_emp(glthread_node_t *node)
+static void print_emp(glue_node_t *node)
 {
     emp *e = (emp *)((char *)node - offsetof(emp, glnode));
     printf("  [%u] %-10s salary=%-6u %s\n", e->emp_id, e->name, e->salary, e->designation);
@@ -35,7 +35,7 @@ int main(void)
     printf("=== Enqueue %d employees ===\n", n);
     for (int i = 0; i < n; i++)
     {
-        memset(&employees[i].glnode, 0, sizeof(glthread_node_t));
+        memset(&employees[i].glnode, 0, sizeof(glue_node_t));
         glqueue_enqueue(&q, &employees[i].glnode);
         printf("  enqueued: %s\n", employees[i].name);
     }
@@ -43,14 +43,14 @@ int main(void)
 
     /* peek front */
     printf("\n=== Front ===\n");
-    glthread_node_t *front = glqueue_front(&q);
+    glue_node_t *front = glqueue_front(&q);
     if (front) print_emp(front);
 
     /* dequeue all */
     printf("\n=== Dequeue all ===\n");
     while (!glqueue_empty(&q))
     {
-        glthread_node_t *node = glqueue_dequeue(&q);
+        glue_node_t *node = glqueue_dequeue(&q);
         printf("  dequeued: ");
         print_emp(node);
     }
@@ -58,7 +58,7 @@ int main(void)
 
     /* dequeue from empty queue */
     printf("\n=== Dequeue from empty ===\n");
-    glthread_node_t *null_node = glqueue_dequeue(&q);
+    glue_node_t *null_node = glqueue_dequeue(&q);
     printf("dequeue returned: %s\n", null_node ? "node" : "NULL");
 
     return 0;

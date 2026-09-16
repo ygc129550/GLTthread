@@ -8,7 +8,7 @@ void glstack_init(glstack_t *stk, unsigned int offset)
     stk->count = 0;
 }
 
-void glstack_push(glstack_t *stk, glthread_node_t *node)
+void glstack_push(glstack_t *stk, glue_node_t *node)
 {
     node->left = NULL;
     node->right = stk->top;
@@ -18,10 +18,10 @@ void glstack_push(glstack_t *stk, glthread_node_t *node)
     stk->count++;
 }
 
-glthread_node_t *glstack_pop(glstack_t *stk)
+glue_node_t *glstack_pop(glstack_t *stk)
 {
     if (!stk->top) return NULL;
-    glthread_node_t *node = stk->top;
+    glue_node_t *node = stk->top;
     stk->top = node->right;
     if (stk->top)
         stk->top->left = NULL;
@@ -31,7 +31,7 @@ glthread_node_t *glstack_pop(glstack_t *stk)
     return node;
 }
 
-glthread_node_t *glstack_peek(glstack_t *stk)
+glue_node_t *glstack_peek(glstack_t *stk)
 {
     return stk->top;
 }
