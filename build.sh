@@ -57,9 +57,9 @@ fi
 
 echo "==> Configuring (static=${BUILD_STATIC}, shared=${BUILD_SHARED}, tests=${BUILD_TESTS})..."
 cmake -S "${SCRIPT_DIR}" -B "${BUILD_DIR}" \
-    -DGLT_BUILD_STATIC="${BUILD_STATIC}" \
-    -DGLT_BUILD_SHARED="${BUILD_SHARED}" \
-    -DGLT_BUILD_TESTS="${BUILD_TESTS}"
+    -DGLUEDS_BUILD_STATIC="${BUILD_STATIC}" \
+    -DGLUEDS_BUILD_SHARED="${BUILD_SHARED}" \
+    -DGLUEDS_BUILD_TESTS="${BUILD_TESTS}"
 
 echo "==> Building (parallel)..."
 cmake --build "${BUILD_DIR}" -j "$(nproc)"
